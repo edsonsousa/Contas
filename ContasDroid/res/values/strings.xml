@@ -1,0 +1,10 @@
+<resources>
+
+    <string name="app_name">Confere</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Configurações</string>
+    <string name="title_activity_registrar_gasto">Registrar Gasto</string>
+    <string name="title_activity_inicio">Confere</string>
+    <string name="title_activity_login">Autenticação</string>
+
+</resources>
