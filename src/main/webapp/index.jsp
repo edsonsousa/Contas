@@ -1,0 +1,1 @@
+<% response.sendRedirect("/contas/paginas/dashboard.xhtml"); %>

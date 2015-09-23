@@ -1,0 +1,59 @@
+<ui:composition template="../template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+	<ui:define name="principal">
+	    <h1>Períodos Cadastrados</h1>
+
+<t:saveState value="#{periodoMB}" />
+<h:form>
+
+	<h:dataTable value="#{periodoMB.periodosUsuario}" var="periodo"
+				rowSelection="single" rowClasses="even, odd">
+
+				<h:column>
+					<f:facet name="header">Nome Período</f:facet>
+					<h:outputText value="#{periodo.nome}" />
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Data Inicial</f:facet>
+					<h:outputText value="#{periodo.dataInicial}" />
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Data Final</f:facet>
+					<h:outputText value="#{periodo.dataFinal}" />
+				</h:column>
+				
+				<h:column>
+					<h:commandButton action="#{periodoMB.editarPeriodo}"
+						value="Editar">
+						<f:setPropertyActionListener target="#{periodoMB.periodoEdicao}"
+							value="#{periodo}" />
+					</h:commandButton>
+				</h:column>
+			</h:dataTable>
+			
+			Periodo:
+				<h:selectOneMenu id="periodo"
+				value="#{periodoMB.periodoClone}" required="true"
+				requiredMessage="Informe o período a ser consultado"
+				converter="periodoConverter">
+				<f:selectItems value="#{periodoMB.periodosUsuario}" var="periodo"
+					itemValue="#{periodo}" itemLabel="#{periodo.nome}" />
+
+			</h:selectOneMenu>
+			
+			<h:commandButton action="#{periodoMB.clonarPeriodo}"
+						value="Novo Período a partir de Existente">
+			</h:commandButton>
+			
+			<h:commandButton action="#{periodoMB.editarPeriodo}"
+						value="Novo Período Vazio">
+			</h:commandButton>
+  </h:form> 
+	</ui:define>
+</ui:composition>

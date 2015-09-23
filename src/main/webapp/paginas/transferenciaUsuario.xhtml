@@ -1,0 +1,49 @@
+<ui:composition template="../template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+	
+	<ui:define name="principal">
+	
+	<t:saveState value="#{transferirMB}" />
+		<h:form>
+			<fieldset>
+				Conta Débito:
+				<h:selectOneMenu id="contadebito"
+					value="#{transferirMB.contaDebitoSelecionada}" required="true"
+					requiredMessage="Informe a conta a ser Debitada."
+					converter="contaConverter">
+					<f:selectItems value="#{transferirMB.contasUsuario}" var="conta"
+						itemValue="#{conta}" itemLabel="#{conta.nome}" />
+					
+				</h:selectOneMenu>
+				<h:message for="contadebito" errorStyle="red" errorClass="erros" />
+				
+				<br /> Conta Crédito:
+				<h:selectOneMenu id="contacredito"
+					value="#{transferirMB.contaCreditoSelecionada}" required="true"
+					requiredMessage="Informe a conta a ser Creditada."
+					converter="contaConverter">
+					<f:selectItems value="#{transferirMB.contasUsuario}" var="conta"
+						itemValue="#{conta}" itemLabel="#{conta.nome}" />
+					
+				</h:selectOneMenu>
+				<h:message for="contacredito" errorStyle="red" errorClass="erros" />
+				<br /> Valor:
+				<h:inputText value="#{transferirMB.valor}" id="valor"
+					required="true" requiredMessage="Informe o valor da Transfer�ncia." />
+				<h:message for="valor" errorStyle="red" errorClass="erros" />
+				<br /> Complemento:
+				<h:inputText value="#{transferirMB.complemento}" id="complemento"
+					required="false" />
+				<br />
+				<h:commandButton value="Transferir"
+					action="#{transferirMB.transferir}" />
+				<br />
+				<h:outputText value="#{transferirMB.mensagemRetorno}" />
+			</fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>

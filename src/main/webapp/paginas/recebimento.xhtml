@@ -1,0 +1,41 @@
+<ui:composition template="../template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="principal">
+		<div onload="#{recebimentoMB.atualizaRecebimento()}">
+			<h:form>
+				<h:commandButton value="Atualizar"
+					action="#{recebimentoMB.atualizaRecebimento}" />
+			</h:form>
+			<h:dataTable value="#{recebimentoMB.recebimentos}" var="recebimento"
+				border="1">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Data e Hora"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{recebimento.dataHora}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Usuário"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{recebimento.usuarioDebito.chave}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Valor"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{recebimento.valor}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Complemento"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{recebimento.complemento}"></h:outputText>
+				</h:column>
+			</h:dataTable>
+		</div>
+	</ui:define>
+</ui:composition>

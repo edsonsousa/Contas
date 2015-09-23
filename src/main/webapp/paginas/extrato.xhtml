@@ -1,0 +1,75 @@
+<ui:composition template="../template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:rich="http://richfaces.org/rich">
+	<ui:define name="principal">
+	
+	<t:saveState value="#{extratoMB}" />
+		Periodo:
+				<h:selectOneMenu id="periodo"
+				value="#{extratoMB.periodoSelecionado}" required="true"
+				requiredMessage="Informe o período a ser consultado"
+				converter="periodoConverter" valueChangeListener="#{extratoMB.alteraPeriodo}" onchange="submit()">
+				<f:selectItems value="#{extratoMB.periodosUsuario}" var="periodo"
+					itemValue="#{periodo}" itemLabel="#{periodo.nome}" />
+
+			</h:selectOneMenu>
+		<h:commandButton value="Consultar"
+			action="#{extratoMB.consultaExtrato}" /><br/><br/>
+			
+			<h:outputText value="Receita Período: #{extratoMB.periodoSelecionado.receitaPeriodo}"/>
+		<rich:dataTable value="#{extratoMB.despesasUsuario}" var="despesa"  id="sublist" style=" height : 133px;">
+		<f:facet name="header">  
+                <rich:columnGroup>
+                <rich:column colspan="4">
+                    <h:outputText value="Despesas"/>
+                </rich:column>
+                <rich:column breakRowBefore="true">
+                    <h:outputText value="Nome"/>
+                </rich:column>
+                <rich:column>
+                    <h:outputText value="Valor Planejado"/>
+                </rich:column>
+                <rich:column>
+                    <h:outputText value="Valor Realizado"/>
+                </rich:column>
+                <rich:column>
+                    <h:outputText value="Saldo Despesa"/>
+                </rich:column>
+            </rich:columnGroup>
+        </f:facet>  
+        <rich:column>
+                <h:outputText value="#{despesa.nome}"/>
+        </rich:column>
+        <rich:column>
+                <h:outputText value="#{despesa.valorPlanejado}"/>
+        </rich:column>
+        <rich:column>
+                <h:outputText value="#{despesa.valorGasto}"/>
+        </rich:column>
+        <rich:column>
+                <h:outputText value="#{despesa.saldoDespesa}"/>
+        </rich:column>
+        <f:facet name="footer">  
+                <rich:columnGroup>
+                <rich:column colspan="1">
+                    <h:outputText value="Totais"/>
+                </rich:column>
+                 
+                <rich:column>
+                    <h:outputText value="#{extratoMB.totalDespesas}"/>
+                </rich:column>
+                <rich:column>
+                    <h:outputText value="#{extratoMB.totalRealizado}"/>
+                </rich:column>
+                <rich:column>
+                    <h:outputText value="#{extratoMB.saldoTotal}"/>
+                </rich:column>
+            </rich:columnGroup>
+        </f:facet>  
+		</rich:dataTable>
+	</ui:define>
+</ui:composition>

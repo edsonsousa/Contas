@@ -1,0 +1,80 @@
+<ui:composition template="../template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<ui:define name="principal">
+
+		<t:saveState value="#{despesaMB}" />
+		<h:form>
+		
+				Despesa:
+				<h:selectOneMenu id="despesa"
+				value="#{despesaMB.despesaSelecionada}" required="true"
+				requiredMessage="Informe a despesa."
+				converter="despesaConverter"  immediate="true" valueChangeListener="#{despesaMB.alteraDespesa}" onchange="submit()">
+				<f:selectItems value="#{despesaMB.despesasPeriodo}" var="despesa"
+					itemValue="#{despesa}" itemLabel="#{despesa.nome}" />
+
+			</h:selectOneMenu><br/>
+			
+			Valor Planejado da Despesa: <h:outputText value="#{despesaMB.despesaSelecionada.valorPlanejado}" /><br/>
+			Valor Realizado da Despesa: <h:outputText value="#{despesaMB.despesaSelecionada.valorGasto}" /><br/>
+			
+
+			<br /> Valor:
+				<h:inputText value="#{despesaMB.valor}" id="valor"
+				required="true" requiredMessage="Informe o valor do Gasto." />
+			
+			<h:commandButton value="Registrar"
+				action="#{despesaMB.registrar}" />
+			<h:commandButton value="Cancelar" action="#{despesaMB.cancelar}" immediate="true" style="margin-right : 8px" />
+			<br />
+			<h:outputText value="#{despesaMB.mensagemRetorno}" />
+			
+			<rich:dataTable value="#{despesaMB.realizacoesDespesaPeriodo}" var="realizacao"  id="sublist" style=" height : 133px;">
+				<f:facet name="header">  
+                <rich:columnGroup>
+                <rich:column colspan="3">
+                    <h:outputText value="Realizações"/>
+                </rich:column>
+                <rich:column breakRowBefore="true">
+                    <h:outputText value="Data"/>
+                </rich:column>
+                <rich:column>
+                    <h:outputText value="Descrição"/>
+                </rich:column>
+                <rich:column>
+                    <h:outputText value="Valor"/>
+                </rich:column>
+            </rich:columnGroup>
+        </f:facet>  
+        <rich:column>
+                <h:outputText value="#{realizacao.datahora}"/>
+        </rich:column>
+        <rich:column>
+                <h:outputText value="#{realizacao.descricao}"/>
+        </rich:column>
+        <rich:column>
+                <h:outputText value="#{realizacao.valor}"/>
+        </rich:column>
+        <f:facet name="footer">  
+                <rich:columnGroup>
+                <rich:column colspan="2">
+                    <h:outputText value="Totais"/>
+                </rich:column>
+                 
+                <rich:column>
+                    <h:outputText value="#{desepsaMB.totalRealizacoes}"/>
+                </rich:column>
+
+            </rich:columnGroup>
+        </f:facet>  
+		</rich:dataTable>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<base href="http://localhost:8080/contas/" />
+	<title>Contas</title>
+</h:head>
+<body style="background-color: #EAEAEA">
+	<div id="topo" style="width: 80%; margin: 0 auto; background-color: #FFF">
+		<ui:insert name="topo">
+			<ui:include src="topo.xhtml" />
+		</ui:insert>
+	</div>
+	<div id="principal">
+		<div style="width: 80%; margin: 0 auto; padding: 10px;">
+			<div
+				style="float: left; background-color: #FFF; width: 25%; border: 1px solid #666; padding: 3px;">
+				<ui:insert name="menu">
+					<ui:include src="menu.xhtml" />
+				</ui:insert>
+			</div>
+			<div style="float: right; background-color: #FFF;  border: 1px solid #666; width: 70%; height: 70%">
+				<ui:insert name="principal" />
+			</div>
+			<div style="clear: both;"></div>
+		</div>
+	</div>
+	<div id="rodape">
+		<ui:insert name="rodape">
+			<ui:include src="rodape.xhtml" />
+		</ui:insert>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<ui:composition template="template_offline.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="principal">
+	 <h1>Usuário ou Senha incorretas</h1>
+		<form method="post" action="j_security_check">
+				<p>
+					Login: <input type="text" name="j_username"/>
+				</p>
+				<p>
+					Senha: <input type="password" name="j_password"/>
+				</p>
+				<p>
+					<input type="submit" value="Entrar"/>
+				</p>
+				<a href="esquecerSenha.xhtml">Esqueceu sua Senha?</a>
+			</form>
+		<br/>
+		<h:outputLink value="cadastros/cadastroUsuario.xhtml">
+			<f:verbatim>Novo Usuário? Registre aqui.</f:verbatim>
+		</h:outputLink>
+
+
+	</ui:define>
+</ui:composition>

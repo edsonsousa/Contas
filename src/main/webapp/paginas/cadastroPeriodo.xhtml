@@ -1,0 +1,69 @@
+<ui:composition template="../template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:rich="http://richfaces.org/rich">
+
+<ui:define name="principal">
+
+<h1>Cadastro de Período</h1>
+
+<t:saveState value="#{periodoMB}" />
+<h:form>
+
+	Nome Período: <h:inputText value="#{periodoMB.periodoEdicao.nome}"/><br/>
+	Data Inicial: <rich:calendar id="dataInicial" popup="true" value="#{periodoMB.periodoEdicao.dataInicial}"
+					cellWidth="40px" cellHeight="40px"></rich:calendar>
+					<br/>
+	Data Final: <rich:calendar id="dataFinal" popup="true" value="#{periodoMB.periodoEdicao.dataFinal}"
+					cellWidth="40px" cellHeight="40px"></rich:calendar>
+					<br /><br />
+	<h:commandButton value="Salvar" 
+	                   action="#{periodoMB.salvarPeriodo}"/>
+	  <h:commandButton value="Cancelar" action="#{periodoMB.cancelar}"  rendered="#{periodoMB.periodoEdicao.codigo == null}" immediate="true" 
+	  		style="margin-right : 8px" />
+	  <br/><br /><br />
+	<rich:dataTable value="#{periodoMB.despesasPeriodoEdicao}" var="despesa"  id="sublist" style=" height : 133px;" 
+		rendered="#{periodoMB.despesasPeriodoEdicao != null}">
+		<f:facet name="header">  
+                <rich:columnGroup>
+                <rich:column colspan="3">
+                    <h:outputText value="Despesas"/>
+                </rich:column>
+                <rich:column breakRowBefore="true">
+                    <h:outputText value="Nome"/>
+                </rich:column>
+                <rich:column>
+                    <h:outputText value="Valor Planejado"/>
+                </rich:column>
+                 <rich:column>
+                    
+                </rich:column>
+            </rich:columnGroup>
+        </f:facet>  
+        <rich:column>
+                <h:outputText value="#{despesa.nome}"/>
+        </rich:column>
+        <rich:column>
+                <h:outputText value="#{despesa.valorPlanejado}"/>
+        </rich:column>
+        <rich:column>
+                <h:commandButton value="Excluir" 
+	                   action="#{periodoMB.excluirDespesa}">
+	                   <f:setPropertyActionListener target="#{periodoMB.despesaExcluir}"
+						value="despesa" />
+				</h:commandButton>
+        </rich:column>
+		</rich:dataTable>
+
+	 <br /><h:commandButton value="Salvar" 
+	                   action="#{periodoMB.salvarPeriodo}"/>
+	  <h:commandButton value="Cancelar" action="#{periodoMB.cancelar}"  rendered="#{periodoMB.periodoEdicao.codigo == null}" immediate="true" 
+	  		style="margin-right : 8px" />
+	  <br/>
+	  	<h:outputText value="#{periodoMB.mensagemRetorno}" />
+  </h:form> 
+	</ui:define>
+</ui:composition>

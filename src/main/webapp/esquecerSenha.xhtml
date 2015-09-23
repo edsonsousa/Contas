@@ -1,0 +1,22 @@
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="principal">
+	    <h1>Recuperar Senha</h1>
+
+<h:form>
+	 <f:metadata>
+	        <f:viewParam name="id" value="#{usuarioMB.id}" />
+	</f:metadata><br/>
+	
+	  
+	  Email: <h:inputText value="#{usuarioMB.instance.email}"/><br/>
+
+	  <h:commandButton value="Recuperar Senha"/>
+	  <br/>
+	  <h:outputText value="#{usuarioMB.mensagemRetorno}"/>
+  </h:form> 
+	</ui:define>
+</ui:composition>

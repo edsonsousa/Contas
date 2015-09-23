@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+	
+
+<h:head><title>Pesquisar Usuário</title>
+</h:head>
+<h:body>
+		<h1>Usuarios</h1>
+		<h:form>
+			<h:dataTable value="#{usuarios}" var="v_usuario"
+				styleClass="dataTable" rowClasses="odd,even">
+				<h:column>
+					<f:facet name="header">Id
+				</f:facet>
+				#{v_usuario.id}
+			</h:column>
+
+				<h:column>
+					<f:facet name="header">Login</f:facet>
+					#{v_usuario.login}"
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Nome	</f:facet>
+					#{v_usuario.nome}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Email
+				</f:facet>
+					#{v_usuario.email}
+				</h:column>
+			</h:dataTable>
+		</h:form> 
+	  	<h:link outcome="cadastroUsuario.xhtml" value="Inserir Usuário" />
+		<h:link outcome="cadastroUsuario.xhtml?id=#{usuarioManager.usuario}" value="Editar Usuário" />
+</h:body>
+</html>
